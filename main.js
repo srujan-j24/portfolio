@@ -9,6 +9,7 @@ const store = {
 }
 window.addEventListener('resize', ()=>{
     store.windowWidth = window.innerWidth;
+    store.root.setProperty('--window-widht', store.windowWidth);
 });
 
 function followMouse(e, fn){
