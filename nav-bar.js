@@ -66,7 +66,7 @@ export function navBarInit(store){
         }
     }
     return new Promise((resolve)=>{
-        store.root.setProperty('--window-width', store.windowWidth);
+        store.root.style.setProperty('--window-width', store.windowWidth);
         store.root.style.setProperty('--mouse-x', store.windowWidth/2)
         lineContSytle.setProperty('--grd-start', store.windowWidth/2);
         lineContSytle.setProperty('--grd-end', store.windowWidth/2);
