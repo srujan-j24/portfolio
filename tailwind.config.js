@@ -9,7 +9,9 @@ export default {
   	extend: {
   		fontFamily: {
   			archivoBlack: ['"Archivo Black"', 'sans-serif'],
-  			montserrat: ['Montserrat"', 'sans-serif']
+  			montserrat: ['Montserrat"', 'sans-serif'],
+			blackOps: ['"Black Ops One"', 'system-ui'],
+			glitch: ['"Rubik Glitch"', 'system-ui']
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

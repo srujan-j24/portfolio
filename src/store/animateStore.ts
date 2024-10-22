@@ -4,13 +4,15 @@ interface AnimateStore {
   navbar: boolean;
   setName: () => void;
   setNavbar: () => void;
-  section: string
+  setSectionId: (payload: number) => void;
+  section: number;
 }
 
 export const useAnimateStore = create<AnimateStore>((set) => ({
   name: false,
   navbar: false,
-  section: 'home',
+  section: 0,
   setName: () => set((state: AnimateStore) => ({ ...state, name: true })),
-  setNavbar: () => set((state: AnimateStore) => ({ ...state, navbar: true }))
+  setNavbar: () => set((state: AnimateStore) => ({ ...state, navbar: true })),
+  setSectionId: (payload:number) => set((state: AnimateStore) => ({ ...state, section: payload }))
 }));
