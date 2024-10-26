@@ -1,5 +1,5 @@
 import {motion} from 'framer-motion';
-import { useState} from "react";
+import {useState} from "react";
 
 function About({ className = ""}: { className?: string; }) {
   const textcolor = '#111827';
@@ -12,14 +12,15 @@ function About({ className = ""}: { className?: string; }) {
     '!(CAPSLOCK==ESC)DoYouNeedAHugBuddy();',
     'Dream==ToGiveAnIntroLikePrimeagen;'
   ];
+
+  const [hovering, setHovering] = useState<string | null>(about[0]);
+
   function isAlphabet(str:string) {
     return /^[A-Za-z]+$/.test(str);
   }
-
-  const [hovering, setHovering] = useState<string | null>(null);
   return (
     <motion.div className={`h-screen ${className} flex py-16 items-center px-8 sm:px-16  justify-around w-full relative flex-col `}>
-      <h1  className="text-[30vw] absolute -z-20 font-archivoBlack text-gray-200 select-none">About</h1>
+      <h1  className="text-[30vw] absolute -z-20 font-archivoBlack text-gray-100 select-none">About</h1>
       <div className="flex flex-wrap justify-start text-sm text-gray-900 sm:text-xl gap-2 font-montserrat  font-medium ">
         {about.map((item, itemIndex) => (
           item.split('').map((letter, letterIndex) => (
@@ -29,7 +30,6 @@ function About({ className = ""}: { className?: string; }) {
               data-hovering={hovering}
               onHoverStart={() => setHovering(item)}
               onTap={() => setHovering(item)}
-              onHoverEnd={() => setHovering(null)}
               style={{scale: 1.3}}
             >
               <motion.span

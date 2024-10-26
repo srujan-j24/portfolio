@@ -5,6 +5,9 @@ import About from "@/components/About.tsx";
 import Section from "@/components/Section.tsx";
 import {useRef} from "react";
 import Skills from "@/components/Skills.tsx";
+import Projects from "@/components/Projects.tsx";
+
+/// <reference types="vite-plugin-svgr" />
 
 function App() {
   const sectionRefs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)];
@@ -18,14 +21,14 @@ function App() {
         <Section sectionId={1} ref={sectionRefs[1]}>
           <About/>
         </Section>
-        <Section sectionId={2} ref={sectionRefs[2]}>
+        <Section sectionId={2} ref={sectionRefs[2]} inDev={true}>
           <Skills/>
         </Section>
-        <Section sectionId={3} className={"bg-purple-200"} ref={sectionRefs[3]}>
-          <About/>
+        <Section sectionId={3} ref={sectionRefs[3]} inDev={true}>
+          <Projects/>
         </Section>
-        <Section sectionId={4} className={"bg-gray-400"} ref={sectionRefs[4]}>
-          <About/>
+        <Section sectionId={4} className={"bg-gray-400"} ref={sectionRefs[4]} inDev={true}>
+          <div></div>
         </Section>
         <ScrollBar className="z-50 absolute"/>
       </ScrollArea>

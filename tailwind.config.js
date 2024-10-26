@@ -7,6 +7,21 @@ export default {
   ],
   theme: {
   	extend: {
+		keyframes: {
+			rotateY: {
+				'0%': { transform: ' rotateZ(-6deg) rotateX(0deg)' },
+				'100%': { transform: 'rotateZ(-6deg) rotateX(360deg) ' },
+			},
+			glitch: {
+				'2%, 64%': { transform: 'translate(2px, 0) skew(0deg)' },
+				'4%, 60%': { transform: 'translate(-2px, 0) skew(2deg)' },
+				'62%': { transform: 'translate(0, 0) skew(50deg)' },
+			},
+		},
+		animation: {
+			rotateY: 'rotateY 10s linear infinite',
+			glitch: 'glitch 1s infinite',
+		},
   		fontFamily: {
   			archivoBlack: ['"Archivo Black"', 'sans-serif'],
   			montserrat: ['Montserrat"', 'sans-serif'],
@@ -62,6 +77,9 @@ export default {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+	  require("tailwindcss-animate"),
+
+  ],
 }
 
