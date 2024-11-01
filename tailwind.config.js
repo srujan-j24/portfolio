@@ -7,6 +7,9 @@ export default {
   ],
   theme: {
   	extend: {
+		boxShadow: {
+			'reflect': '-webkit-box-reflect: below 0px linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.329));',
+		},
 		keyframes: {
 			rotateY: {
 				'0%': { transform: ' rotateZ(-6deg) rotateX(0deg)' },

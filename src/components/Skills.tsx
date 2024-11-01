@@ -1,55 +1,100 @@
-import ViteSVG from '../assets/vite.svg'
-import ReactSVG from '../assets/react.svg'
-import TailwindSVG from '../assets/tailwind.svg'
-import AwsSVG from '../assets/aws.svg'
+import { AnimatePresence, motion, useInView } from 'framer-motion';
+import SkillCard from "@/components/SkillCard.tsx";
+import { useState, useRef } from "react";
+import awsSVG from '../assets/aws.svg';
+import gitSVG from '../assets/git.svg';
+import javaSVG from '../assets/java.svg';
+import nodeSVG from '../assets/node.svg';
+import pythonSVG from '../assets/python.svg';
+import reactSVG from '../assets/react.svg';
+import vimSVG from '../assets/vim.svg';
+import viteSVG from '../assets/vite.svg';
+
 function Skills() {
+  const allSkills = [
+    { imgPath: reactSVG, id: 'react', bgColor: '#61DAFB' },
+    { imgPath: vimSVG, id: 'vim', bgColor: '#019833' },
+    { imgPath: awsSVG, id: 'aws', bgColor: '#FF9900' },
+    { imgPath: gitSVG, id: 'git', bgColor: '#F05032' },
+    { imgPath: javaSVG, id: 'java', bgColor: '#007396' },
+    { imgPath: pythonSVG, id: 'python', bgColor: '#3776AB' },
+    { imgPath: nodeSVG, id: 'node', bgColor: '#8CC84B' },
+    { imgPath: viteSVG, id: 'vite', bgColor: '#646CFF' },
+  ];
+
+  const [displaySkills, setDisplaySkills] = useState(
+    allSkills.slice(0, 4).map((skill, index) => ({ ...skill, pos: index }))
+  );
+  const [nextIndex, setNextIndex] = useState(4);
+
+  const skillsRef = useRef(null);
+  const inView  = useInView(skillsRef, {
+    amount: 0.8,
+    once: true
+  });
+
+  const nextSkill = () => {
+    setDisplaySkills((prevDisplaySkills) => {
+      const newSkill = { ...allSkills[nextIndex], pos: 0 };
+      const updatedSkills = [
+        newSkill,
+        ...prevDisplaySkills.slice(0, prevDisplaySkills.length - 1).map((skill, index) => ({
+          ...skill,
+          pos: index + 1,
+        })),
+      ];
+      return updatedSkills;
+    });
+    setNextIndex((prev) => (prev + 1) % allSkills.length);
+  };
+
+  const transition = { type: 'spring', stiffness: 40, damping: 10,};
 
   return (
-    <div className="h-screen w-screen relative overflow-hidden flex items-center">
-      <h1 className="font-glitch absolute  text-gray-100 text-[30vw] -rotate-6 select-none w-full -z-10 text-center bg-white">
-        Skills
-      </h1>
-      {/*<div className="h-full w-full p-8 sm:p-16 flex flex-col sm:flex-row items-center">*/}
-      {/*  <div className="w-full  sm:h-full aspect-square flex items-center justify-center">*/}
-      {/*    <img src={ViteSVG} alt="" className="h-2/5 "/>*/}
-      {/*  </div>*/}
-      {/*  <div className="w-2/3 sm:h-2/3 aspect-square flex items-center justify-center">*/}
-      {/*    <img src={ViteSVG} alt="" className="h-2/5 "/>*/}
-      {/*  </div>*/}
-      {/*  <div className="w-1/3 sm:h-1/3 aspect-square flex items-center justify-center">*/}
-      {/*    <img src={ViteSVG} alt="" className="h-2/5 "/>*/}
-      {/*  </div>*/}
-      {/*</div>*/}
-      {/*<div className="h-full w-full grid grid-cols-10 p-8 sm:p-16">*/}
-      {/*  <div className="col-span-4 flex items-center justify-center ">*/}
-      {/*      <img src={ReactSVG} alt="" className="w-1/2"/>*/}
-      {/*  </div>*/}
-      {/*  <div className="col-span-3 flex items-center justify-center opacity-75">*/}
-      {/*    <img src={TailwindSVG} alt="" className="w-1/2"/>*/}
-      {/*  </div>*/}
-      {/*  <div className="col-span-2 flex items-center justify-center opacity-50">*/}
-      {/*    <img src={AwsSVG} alt="" className="w-1/2"/>*/}
-      {/*  </div>*/}
-      {/*  <div className="col-span-1 flex items-center justify-center opacity-25">*/}
-      {/*    <img src={ViteSVG} alt="" className="w-1/2"/>*/}
-      {/*  </div>*/}
-      {/*</div>*/}
-      <div className="h-full w-full flex sm:flex-row p-8 sm:p-16 items-center">
-        <div className="w-[40%] aspect-square flex items-center justify-center">
-          <img src={ReactSVG} alt="" className="w-1/2"/>
-        </div>
-        <div className="w-[30%] aspect-square flex items-center justify-center">
-          <img src={TailwindSVG} alt="" className="w-1/2"/>
-        </div>
-        <div className="w-[20%] aspect-square flex items-center justify-center">
-          <img src={AwsSVG} alt="" className="w-1/2"/>
-        </div>
-        <div className="w-[10%] aspect-square flex items-center justify-center">
-          <img src={ViteSVG} alt="" className="w-1/2"/>
-        </div>
-      </div>
+    <div className="h-screen flex items-center justify-center p-8 sm:p-16 overflow-hidden" onClick={nextSkill}>
+      <motion.div
+        ref={skillsRef}
+        className="h-full w-full flex items-center justify-center relative"
+        style={{
+          transformStyle: 'preserve-3d',
+          perspective: '50vw',
+          translateY: '-3rem'
+        }}
+      >
+        <AnimatePresence>
+          {displaySkills.map((skill) => (
+            <motion.div
+              key={skill.id}
+              className="absolute bg-white sm:w-4/6 sm:h-auto sm:aspect-video h-3/6 aspect-[9/16]"
+              initial={{
+                translateZ: `${(0 - 1.5) * 2.5}rem`,
+                translateY: `${(0 - 1.5) * 2.5}rem`,
+              }}
+              animate={{
+                translateZ: inView ? `${(skill.pos - 1.5) * 2.5}rem` :`${(0 - 1.5) * 2.5}rem`,
+                translateY: inView ? `${(skill.pos - 1.5) * 2.5}rem` :`${(0 - 1.5) * 2.5}rem`
+              }}
+              exit={{
+                translateY: `${(skill.pos - 1.5) * 2.5 + 100}rem`,
+                // translateZ: `${(skill.pos - 1.5) * 2.5 + 100}rem`,
+                // opacity: 0,
+                transition: {
+                  ...transition, delay: 0
+                }
+              }}
+              transition={transition}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <SkillCard pos={skill.pos} imgPath={skill.imgPath} transition={transition} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </motion.div>
     </div>
   );
 }
 
 export default Skills;
+
+
+

@@ -5,7 +5,7 @@ const container = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.05,
     },
   },
 };
@@ -17,7 +17,7 @@ const letterVariants = {
   visible: {
     opacity: 1,
     transition: {
-      duration: 0.1
+      duration: 0.05
     }
   },
 };

@@ -26,7 +26,7 @@ const Section = forwardRef<HTMLElement, SectionProps>(({sectionId, className="",
     >
       {
         inDev &&
-        <div className="absolute z-50 top-0 bg-opacity-75 left-0 h-screen w-screen bg-gray-400 flex items-center justify-center text-3xl">
+        <div className="absolute z-50 top-0 bg-opacity-75 left-0 h-screen w-screen bg-gray-400 flex items-center justify-center text-3xl pointer-events-none">
             This Section is still in still in development
         </div>
       }

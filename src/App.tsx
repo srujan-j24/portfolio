@@ -24,11 +24,11 @@ function App() {
         <Section sectionId={2} ref={sectionRefs[2]} inDev={true}>
           <Skills/>
         </Section>
-        <Section sectionId={3} ref={sectionRefs[3]} inDev={true}>
+        <Section sectionId={3} ref={sectionRefs[3]} inDev={true} >
           <Projects/>
         </Section>
         <Section sectionId={4} className={"bg-gray-400"} ref={sectionRefs[4]} inDev={true}>
-          <div></div>
+          <div className="h-screen w-screen"></div>
         </Section>
         <ScrollBar className="z-50 absolute"/>
       </ScrollArea>
