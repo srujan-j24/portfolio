@@ -12,14 +12,14 @@ import viteSVG from '../assets/vite.svg';
 
 function Skills() {
   const allSkills = [
-    { imgPath: gitSVG, id: 'git', bgColor: '#F05032' },
-    { imgPath: awsSVG, id: 'aws', bgColor: '#FF9900' },
-    { imgPath: vimSVG, id: 'vim', bgColor: '#019833' },
-    { imgPath: reactSVG, id: 'react', bgColor: '#61DAFB' },
-    { imgPath: javaSVG, id: 'java', bgColor: '#007396' },
-    { imgPath: pythonSVG, id: 'python', bgColor: '#3776AB' },
-    { imgPath: nodeSVG, id: 'node', bgColor: '#8CC84B' },
-    { imgPath: viteSVG, id: 'vite', bgColor: '#646CFF' },
+    { imgPath: gitSVG, id: 'git'},
+    { imgPath: awsSVG, id: 'aws' },
+    { imgPath: vimSVG, id: 'vim' },
+    { imgPath: reactSVG, id: 'react'},
+    { imgPath: javaSVG, id: 'java' },
+    { imgPath: pythonSVG, id: 'python'},
+    { imgPath: nodeSVG, id: 'node' },
+    { imgPath: viteSVG, id: 'vite' },
   ];
 
   const [displaySkills, setDisplaySkills] = useState(
@@ -29,7 +29,7 @@ function Skills() {
 
   const skillsRef = useRef(null);
   const inView  = useInView(skillsRef, {
-    amount: 0.5,
+    amount: 0.8,
     once: true
   });
 
@@ -59,14 +59,14 @@ function Skills() {
         style={{
           transformStyle: 'preserve-3d',
           perspective: '50vw',
-          translateY: '-1.25rem'
+          translateY: '-3.25rem'
         }}
       >
         <AnimatePresence>
           {displaySkills.map((skill) => (
             <motion.div
-              key={`${skill.id} `}
-              data-id={`${skill.id}`}
+              key={`${skill.id}`}
+              data-id={`${skill.id }`}
               className="absolute bg-white sm:w-4/6 sm:h-auto sm:aspect-video h-3/6 aspect-[9/16]"
               initial={{
                 translateZ: `${(0 - 1.5) * 2.5}rem`,
@@ -79,10 +79,10 @@ function Skills() {
                 opacity: 1
               }}
               exit={{
-                translateY: `${(skill.pos - 1.5) * 2.5 + 100}rem`,
+                translateY: `${(skill.pos - 1.5) * 2.5 + 40}rem`,
                 // opacity: 0,
                 transition: {
-                  ...transition, delay: 0,
+                  ...transition, delay: 0, duration: 0.5
                 }
               }}
               onAnimationComplete={(definition) => {

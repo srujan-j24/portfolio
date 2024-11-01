@@ -45,7 +45,7 @@ function Navbar({sectionRefs}: {sectionRefs: RefObject<HTMLElement>[]}){
           color="#4b5563"
         ></l-quantum>
       </div>
-      <ul className="sm:flex hidden  gap-16 px-8 text-gray-600 text-xl font-medium font-montserrat h-full items-center justify-end">
+      <ul className="sm:flex hidden  gap-16 px-8 text-gray-600 text-lg font-semibold font-montserrat h-full items-center justify-end">
         <li>
           <NavItem previous={'Home'} current={'About'} prevRef={sectionRefs[0]} curRef={sectionRefs[1]} sectionId={0}></NavItem>
         </li>
