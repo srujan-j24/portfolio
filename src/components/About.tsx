@@ -1,5 +1,5 @@
-import {motion} from 'framer-motion';
-import {useState} from "react";
+import {motion, useInView} from 'framer-motion';
+import {useRef, useState} from "react";
 
 function About({ className = ""}: { className?: string; }) {
   const textcolor = '#111827';
@@ -14,12 +14,13 @@ function About({ className = ""}: { className?: string; }) {
   ];
 
   const [hovering, setHovering] = useState<string | null>(about[0]);
-
+  const ref = useRef(null);
+  const inView = useInView(ref, { amount: 0.5, once: true });
   function isAlphabet(str:string) {
     return /^[A-Za-z]+$/.test(str);
   }
   return (
-    <motion.div className={`h-screen ${className} flex py-16 items-center px-8 sm:px-16  justify-around w-full relative flex-col `}>
+    <motion.div ref={ref} className={`h-screen ${className} flex py-16 items-center px-8 sm:px-16  justify-around w-full relative flex-col overflow-hidden `}>
       <h1  className="text-[30vw] absolute -z-20 font-archivoBlack text-gray-100 select-none">About</h1>
       <div className="flex flex-wrap justify-start text-sm text-gray-900 sm:text-xl gap-2 font-montserrat  font-medium ">
         {about.map((item, itemIndex) => (
@@ -40,7 +41,13 @@ function About({ className = ""}: { className?: string; }) {
                 }}
                 transition={{ type: "spring",duration: 0.5   }}
               >
-                {letter}
+                <motion.div
+                  initial={{opacity: 0}}
+                  animate={{opacity: inView ? 1 : 0}}
+                  transition={{delay: Math.random() * 2}}
+                >
+                  {letter}
+                </motion.div>
               </motion.span>
             </motion.div>
           ))

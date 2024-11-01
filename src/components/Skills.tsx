@@ -12,10 +12,10 @@ import viteSVG from '../assets/vite.svg';
 
 function Skills() {
   const allSkills = [
-    { imgPath: reactSVG, id: 'react', bgColor: '#61DAFB' },
-    { imgPath: vimSVG, id: 'vim', bgColor: '#019833' },
-    { imgPath: awsSVG, id: 'aws', bgColor: '#FF9900' },
     { imgPath: gitSVG, id: 'git', bgColor: '#F05032' },
+    { imgPath: awsSVG, id: 'aws', bgColor: '#FF9900' },
+    { imgPath: vimSVG, id: 'vim', bgColor: '#019833' },
+    { imgPath: reactSVG, id: 'react', bgColor: '#61DAFB' },
     { imgPath: javaSVG, id: 'java', bgColor: '#007396' },
     { imgPath: pythonSVG, id: 'python', bgColor: '#3776AB' },
     { imgPath: nodeSVG, id: 'node', bgColor: '#8CC84B' },
@@ -29,7 +29,7 @@ function Skills() {
 
   const skillsRef = useRef(null);
   const inView  = useInView(skillsRef, {
-    amount: 0.8,
+    amount: 0.5,
     once: true
   });
 
@@ -50,6 +50,7 @@ function Skills() {
 
   const transition = { type: 'spring', stiffness: 40, damping: 10,};
 
+
   return (
     <div className="h-screen flex items-center justify-center p-8 sm:p-16 overflow-hidden" onClick={nextSkill}>
       <motion.div
@@ -58,28 +59,37 @@ function Skills() {
         style={{
           transformStyle: 'preserve-3d',
           perspective: '50vw',
-          translateY: '-3rem'
+          translateY: '-1.25rem'
         }}
       >
         <AnimatePresence>
           {displaySkills.map((skill) => (
             <motion.div
-              key={skill.id}
+              key={`${skill.id} `}
+              data-id={`${skill.id}`}
               className="absolute bg-white sm:w-4/6 sm:h-auto sm:aspect-video h-3/6 aspect-[9/16]"
               initial={{
                 translateZ: `${(0 - 1.5) * 2.5}rem`,
                 translateY: `${(0 - 1.5) * 2.5}rem`,
+                opacity: 1
               }}
               animate={{
                 translateZ: inView ? `${(skill.pos - 1.5) * 2.5}rem` :`${(0 - 1.5) * 2.5}rem`,
-                translateY: inView ? `${(skill.pos - 1.5) * 2.5}rem` :`${(0 - 1.5) * 2.5}rem`
+                translateY: inView ? `${(skill.pos - 1.5) * 2.5}rem` :`${(0 - 1.5) * 2.5}rem`,
+                opacity: 1
               }}
               exit={{
                 translateY: `${(skill.pos - 1.5) * 2.5 + 100}rem`,
-                // translateZ: `${(skill.pos - 1.5) * 2.5 + 100}rem`,
                 // opacity: 0,
                 transition: {
-                  ...transition, delay: 0
+                  ...transition, delay: 0,
+                }
+              }}
+              onAnimationComplete={(definition) => {
+                console.log(definition === 'exit')
+
+                if (definition === "exit") {
+                  console.log(`${skill.id} has exited`);
                 }
               }}
               transition={transition}

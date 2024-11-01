@@ -21,7 +21,7 @@ function App() {
         <Section sectionId={1} ref={sectionRefs[1]}>
           <About/>
         </Section>
-        <Section sectionId={2} ref={sectionRefs[2]} inDev={true}>
+        <Section sectionId={2} ref={sectionRefs[2]} inDev={false}>
           <Skills/>
         </Section>
         <Section sectionId={3} ref={sectionRefs[3]} inDev={true} >
