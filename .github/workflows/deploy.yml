@@ -34,3 +34,12 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           SOURCE_DIR: build
           S3_BUCKET: ${{ secrets.S3_BUCKET }}
+      - name: Debug Environment Variables
+        run: |
+          echo "AWS_REGION: $AWS_REGION"
+          echo "SOURCE_DIR: $SOURCE_DIR"
+          echo "S3_BUCKET: $S3_BUCKET"
+        env:
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          SOURCE_DIR: build
+          S3_BUCKET: ${{ secrets.S3_BUCKET }}
