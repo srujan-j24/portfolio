@@ -16,7 +16,7 @@ function NavItem({current, previous, sectionId, prevRef, curRef}: {current: stri
             &&
               <motion.h3
                 key={current}
-                className="cursor-pointer w-20"
+                className="cursor-pointer"
                 initial={{opacity: 0, y: -20}}
                 animate={{opacity: 1, y: 0}}
                 exit={{opacity: 0, y: -20}}
@@ -31,7 +31,7 @@ function NavItem({current, previous, sectionId, prevRef, curRef}: {current: stri
             &&
               <motion.h3
                 key={previous}
-                className="cursor-pointer w-20 "
+                className="cursor-pointer"
                 initial={{opacity: 0, y: -20}}
                 animate={{opacity: 1, y: 0}}
                 whileHover={{scale: 1.05}}

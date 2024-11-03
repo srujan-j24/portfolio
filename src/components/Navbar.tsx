@@ -7,17 +7,8 @@ function Navbar({sectionRefs}: {sectionRefs: RefObject<HTMLElement>[]}){
   const [scope, animate] = useAnimate();
   const {navbar} = useAnimateStore();
   quantum.register();
-  const staggerNavItems = stagger(0.2, {startDelay: 1});
+  const staggerNavItems = stagger(0.2, {startDelay: 0.5});
   const navBarAnimation = async () => {
-    await animate(
-      "li",
-      navbar
-        ? {opacity: 1, y: 0}
-        : {opacity: 0, y: -20},
-      {
-        delay: navbar ? staggerNavItems : 0
-      }
-    )
     await animate(
       ".logo",
       navbar
@@ -25,6 +16,16 @@ function Navbar({sectionRefs}: {sectionRefs: RefObject<HTMLElement>[]}){
         : {scale: 0},
       {
         duration: navbar ? 0.5  : 0,
+        delay: 0.5
+      }
+    )
+    await animate(
+      "li",
+      navbar
+        ? {opacity: 1, y: 0}
+        : {opacity: 0, y: -20},
+      {
+        delay: navbar ? staggerNavItems : 0
       }
     )
   }
@@ -37,7 +38,7 @@ function Navbar({sectionRefs}: {sectionRefs: RefObject<HTMLElement>[]}){
     navBarAnimation();
   }, [animate, navbar]);
   return (
-    <nav className="fixed flex justify-between top-0 h-16 w-screen z-10 px-8 sm:px-16 items-center backdrop-blur-xl Fnav" ref={scope}>
+    <nav className="fixed flex justify-between top-0 h-16 w-screen z-10 px-8 sm:px-16 items-center backdrop-blur-xl Fnav " ref={scope}>
       <div className="logo scale-0" onClick={toggleLogoSpeed}>
         <l-quantum
           size="32"
@@ -46,16 +47,16 @@ function Navbar({sectionRefs}: {sectionRefs: RefObject<HTMLElement>[]}){
         ></l-quantum>
       </div>
       <ul className="sm:flex hidden  gap-16 px-8 text-gray-600 text-lg font-semibold font-montserrat h-full items-center justify-end">
-        <li>
+        <li className="flex justify-center items-center w-20">
           <NavItem previous={'Home'} current={'About'} prevRef={sectionRefs[0]} curRef={sectionRefs[1]} sectionId={0}></NavItem>
         </li>
-        <li>
+        <li className="flex justify-center items-center w-20">
           <NavItem previous={'About'} current={'Skills'} prevRef={sectionRefs[1]} curRef={sectionRefs[2]} sectionId={1}></NavItem>
         </li>
-        <li>
+        <li className="flex justify-center items-center w-20">
           <NavItem previous={'Skills'} current={'Projects'} prevRef={sectionRefs[2]} curRef={sectionRefs[3]} sectionId={2}></NavItem>
         </li>
-        <li>
+        <li className="flex justify-center items-center w-20">
           <NavItem previous={'Projects'} current={'Contact'} prevRef={sectionRefs[3]} curRef={sectionRefs[4]} sectionId={3}></NavItem>
         </li>
       </ul>

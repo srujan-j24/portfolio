@@ -23,9 +23,10 @@ function Skills() {
   ];
 
   const [displaySkills, setDisplaySkills] = useState(
-    allSkills.slice(0, 4).map((skill, index) => ({ ...skill, pos: index }))
+    allSkills.slice(0, 4).map((skill, index) => ({ ...skill, pos: index, version: 0 }))
   );
-  const [nextIndex, setNextIndex] = useState(4);
+  const [nextIndex, setNextIndex] = useState(7);
+  const [versionCounter, setVersionCounter] = useState(1);
 
   const skillsRef = useRef(null);
   const inView  = useInView(skillsRef, {
@@ -35,7 +36,9 @@ function Skills() {
 
   const nextSkill = () => {
     setDisplaySkills((prevDisplaySkills) => {
-      const newSkill = { ...allSkills[nextIndex], pos: 0 };
+      const newSkill = { ...allSkills[nextIndex], pos: 0, version: versionCounter };
+      setVersionCounter((prev) => prev + 1); // Increment the version counter
+
       const updatedSkills = [
         newSkill,
         ...prevDisplaySkills.slice(0, prevDisplaySkills.length - 1).map((skill, index) => ({
@@ -45,11 +48,10 @@ function Skills() {
       ];
       return updatedSkills;
     });
-    setNextIndex((prev) => (prev + 1) % allSkills.length);
+    setNextIndex((prev) => (prev - 1 + allSkills.length)  % allSkills.length);
   };
 
-  const transition = { type: 'spring', stiffness: 40, damping: 10,};
-
+  const transition = { type: 'spring', stiffness: 40, damping: 10 };
 
   return (
     <div className="h-screen flex items-center justify-center p-8 sm:p-16 overflow-hidden" onClick={nextSkill}>
@@ -65,8 +67,8 @@ function Skills() {
         <AnimatePresence>
           {displaySkills.map((skill) => (
             <motion.div
-              key={`${skill.id}`}
-              data-id={`${skill.id }`}
+              key={`${skill.id}-${skill.version}`}
+              data-id={`${skill.id}`}
               className="absolute bg-white sm:w-4/6 sm:h-auto sm:aspect-video h-3/6 aspect-[9/16]"
               initial={{
                 translateZ: `${(0 - 1.5) * 2.5}rem`,
@@ -74,20 +76,18 @@ function Skills() {
                 opacity: 1
               }}
               animate={{
-                translateZ: inView ? `${(skill.pos - 1.5) * 2.5}rem` :`${(0 - 1.5) * 2.5}rem`,
-                translateY: inView ? `${(skill.pos - 1.5) * 2.5}rem` :`${(0 - 1.5) * 2.5}rem`,
+                translateZ: inView ? `${(skill.pos - 1.5) * 2.5}rem` : `${(0 - 1.5) * 2.5}rem`,
+                translateY: inView ? `${(skill.pos - 1.5) * 2.5}rem` : `${(0 - 1.5) * 2.5}rem`,
                 opacity: 1
               }}
               exit={{
                 translateY: `${(skill.pos - 1.5) * 2.5 + 40}rem`,
-                // opacity: 0,
+                translateZ: `${(skill.pos - 1.5) * 2.5}rem`,
                 transition: {
                   ...transition, delay: 0, duration: 0.5
                 }
               }}
               onAnimationComplete={(definition) => {
-                console.log(definition === 'exit')
-
                 if (definition === "exit") {
                   console.log(`${skill.id} has exited`);
                 }
@@ -105,6 +105,5 @@ function Skills() {
 }
 
 export default Skills;
-
 
 

@@ -6,6 +6,7 @@ import Section from "@/components/Section.tsx";
 import {useRef} from "react";
 import Skills from "@/components/Skills.tsx";
 import Projects from "@/components/Projects.tsx";
+import {motion} from 'framer-motion'
 
 /// <reference types="vite-plugin-svgr" />
 
@@ -28,7 +29,10 @@ function App() {
           <Projects/>
         </Section>
         <Section sectionId={4} className={"bg-gray-400"} ref={sectionRefs[4]} inDev={true}>
-          <div className="h-screen w-screen"></div>
+          <motion.div
+            className="h-screen w-screen flex items-center justify-evenly scroll-auto"
+          >
+          </motion.div>
         </Section>
         <ScrollBar className="z-50 absolute"/>
       </ScrollArea>
@@ -37,21 +41,3 @@ function App() {
 }
 
 export default App
-/*
-
-if CHAI > COFFEE:
-  letHangOut()
-
-TABS over SPACES
-
-ATHEIST => ME => AGNOSTIC
-
-
-
-
-
-
-
-
-
-*/
