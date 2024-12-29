@@ -14,7 +14,7 @@ function App() {
   const sections = [
     { id: 0, component: <Hero />, inDev: false },
     { id: 1, component: <About /> , inDev: false },
-    { id: 2, component: <Skills /> , inDev: false},
+    { id: 2, component: <Skills /> , inDev: true},
     { id: 3, component: <Projects />, inDev: true },
     { id: 4, component: <Contact />, inDev: true}
   ]
