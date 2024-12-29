@@ -1,5 +1,5 @@
-import {ReactNode, useEffect, Ref, forwardRef} from "react";
-import {useInView} from "framer-motion";
+import {ReactNode, useEffect, Ref, forwardRef,} from "react";
+import {useInView} from "motion/react";
 import {useAnimateStore} from "@/store/animateStore.ts";
 
 interface SectionProps {
@@ -18,7 +18,7 @@ const Section = forwardRef<HTMLElement, SectionProps>(({sectionId, className="",
     if(isInView){
       setSectionId(sectionId);
     }
-  },[isInView, sectionId, ] )
+  },[isInView, sectionId] )
   return (
     <section
       ref={ref}
@@ -26,8 +26,8 @@ const Section = forwardRef<HTMLElement, SectionProps>(({sectionId, className="",
     >
       {
         inDev &&
-        <div className="absolute z-50 top-0 bg-opacity-75 left-0 h-screen w-screen bg-gray-400 flex items-center justify-center text-3xl pointer-events-none">
-            This Section is still in still in development
+        <div className="absolute z-50 top-0 bg-opacity-30 left-0 h-screen w-screen bg-gray-400 flex items-center justify-center text-3xl pointer-events-none">
+            This Section is still in development
         </div>
       }
       {children}
